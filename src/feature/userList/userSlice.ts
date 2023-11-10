@@ -8,12 +8,12 @@ import { UserInterface } from "../../interfaces/User"
 
 // Define a type for the slice state
 interface UserListState {
-  value: UserInterface[]
+  users: UserInterface[]
 }
 
 // Define the initial state using that type
 const initialState: UserListState = {
-  value: [],
+  users: [],
 }
 
 export const userSlice = createSlice({
@@ -21,16 +21,16 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     setUsers: (state, action: PayloadAction<UserInterface[]>) => {
-      state.value = action.payload
+      state.users = action.payload
     },
     clearUsers: (state) => {
-      state.value = []
+      state.users = []
     },
   },
 })
 
-export const { setUsers } = userSlice.actions
+export const { setUsers, clearUsers } = userSlice.actions
 
-export const selectUserList = (state: RootState) => state.userList.value
+export const selectUserList = (state: RootState) => state.userList.users
 
 export default userSlice.reducer
