@@ -17,7 +17,7 @@ const UserServiceFetch = () => {
   // us to easily manage the loading and error states for the API call
   const { isLoading, error, data } = useQuery(['users'], async () => {
     // We fetch all the users from the API and we will deal with pagination ourselves
-    const response = await fetch('https://rqweqweqres.in/api/uaseasdasdrs?per_page=12')
+    const response = await fetch('https://reqres.in/api/users?per_page=12')
     const userData = await response.json()
     return userData
   })

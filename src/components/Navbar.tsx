@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 function Navbar() {
   return (
-    <AppBar position="static" sx={{ width: '100%', padding: '0', margin: '0' }}>
+    <AppBar position="static" sx={{ width: '100%' }}>
       <Toolbar>
         {/* Título del AppBar */}
         <Typography variant="h6" sx={{ userSelect: 'none' }}>

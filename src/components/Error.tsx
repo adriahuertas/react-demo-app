@@ -1,15 +1,16 @@
-import { useSelector } from 'react-redux'
-import { selectError } from '../feature/error/errorSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectError, setMessage } from '../feature/error/errorSlice'
 import { useEffect } from 'react'
 
 const Error = () => {
   const message = useSelector(selectError)
+  const dispatch = useDispatch()
 
   useEffect(() => {
     return () => {
-      console.log('unmounting')
+      dispatch(setMessage(''))
     }
-  }, [])
+  }, [dispatch])
   return (
     <h2>
       {message}
