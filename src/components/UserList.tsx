@@ -18,6 +18,7 @@ const UserList = () => {
 
   // We only display 6 users per page
   const [usersToDisplay, setUsersToDisplay] = useState<UserInterface[]>(users.slice(0, 6))
+
   // Filtered users to display
   const [filteredUsersToDisplay, setFilteredUsersToDisplay] = useState<UserInterface[]>(usersToDisplay)
 
@@ -26,12 +27,16 @@ const UserList = () => {
 
   const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
     event.preventDefault()
+
     setUsersToDisplay(users.slice((value - 1) * 6, value * 6))
+    setFilteredUsersToDisplay(users.slice((value - 1) * 6, value * 6))
+
     setFilter("")
   };
 
   const handleFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newFilter = event.target.value
+
     setFilter(newFilter)
 
     setFilteredUsersToDisplay(filterUsers(usersToDisplay, newFilter))

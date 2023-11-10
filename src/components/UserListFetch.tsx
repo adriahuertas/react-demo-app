@@ -5,8 +5,10 @@ import { useDispatch } from "react-redux";
 import { setUsers } from "../feature/userList/userSlice";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { setMessage } from "../feature/error/errorSlice";
+import Loading from "./Loading";
 
-const UserService = () => {
+const UserServiceFetch = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -15,12 +17,17 @@ const UserService = () => {
   // us to easily manage the loading and error states for the API call
   const { isLoading, error, data } = useQuery(['users'], async () => {
     // We fetch all the users from the API and we will deal with pagination ourselves
-    const response = await fetch(`https://reqres.in/api/users?per_page=12`);
+    const response = await fetch(`https://rqweqweqres.in/api/uaseasdasdrs?per_page=12`);
     const userData = await response.json();
     return userData;
   });
 
   useEffect(() => {
+    if (error) {
+      dispatch(setMessage("Error conectando con la API"))
+      navigate("/error")
+    }
+
     if (!isLoading && !error && data) {
       dispatch(setUsers(data.data))
 
@@ -29,13 +36,14 @@ const UserService = () => {
     }
   }, [isLoading, error, data, dispatch, navigate])
 
-  if (isLoading) return "Loading..."
+  if (isLoading) {
+    return <Loading />
+  }
 
-  if (error) return "An error has occurred: " + (error as Error).message
 
   // This component will render null because the redirection will happen in useEffect
   return null
 }
 
 
-export default UserService
+export default UserServiceFetch
