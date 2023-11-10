@@ -1,19 +1,30 @@
+import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material'
 import { Link } from 'react-router-dom'
 
-const Navbar = () => {
-  const user = false
+function Navbar() {
   return (
-    <nav>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          {user && <Link to="/users">Users</Link>}
-          {!user && <Link to="/login">Login</Link>}
-        </li>
-      </ul>
-    </nav>
+    <AppBar position="static" sx={{ width: '100%', padding: '0', margin: '0' }}>
+      <Toolbar>
+        {/* Título del AppBar */}
+        <Typography variant="h6" sx={{ userSelect: 'none' }}>
+          React Demo APP
+        </Typography>
+
+        {/* Botones de Login y Users */}
+        <Box sx={{ display: 'flex', justifyContent: 'flex-end', flexGrow: 1 }}>
+          <Button color="inherit">
+            <Link to="/login" style={{ textDecoration: 'none', color: 'white' }}>
+              Login
+            </Link>
+          </Button>
+          <Button color="inherit">
+            <Link to="/users" style={{ textDecoration: 'none', color: 'white' }}>
+              Users
+            </Link>
+          </Button>
+        </Box>
+      </Toolbar>
+    </AppBar>
   )
 }
 
