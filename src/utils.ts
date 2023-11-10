@@ -1,4 +1,4 @@
-import { UserInterface } from "./interfaces/User"
+import { type UserInterface } from './interfaces/User'
 
 // Filter users by first name and last name
 export const filterUsers = (users: UserInterface[], filter: string) => {

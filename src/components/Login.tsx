@@ -1,16 +1,16 @@
-import { AccountCircle, Visibility, VisibilityOff } from "@mui/icons-material"
-import { Button, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField } from "@mui/material"
-import { useState } from "react";
+import { AccountCircle, Visibility, VisibilityOff } from '@mui/icons-material'
+import { Button, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField } from '@mui/material'
+import { useState } from 'react'
 
 const Login = () => {
-  const [showPassword, setShowPassword] = useState(false);
-  const [password, setPassword] = useState("")
-  const [email, setEmail] = useState("")
+  const [showPassword, setShowPassword] = useState(false)
+  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState('')
 
-  const handleClickShowPassword = () => setShowPassword((show) => !show)
+  const handleClickShowPassword = () => { setShowPassword((show) => !show) }
 
   const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
+    event.preventDefault()
   }
 
   const handleSubmit = () => {
@@ -23,7 +23,7 @@ const Login = () => {
       Login Component
       <TextField
         label="Email"
-        onChange={(e) => setEmail(e.target.value)}
+        onChange={(e) => { setEmail(e.target.value) }}
         placeholder="user@example.com"
         id="outlined-start-adornment"
         sx={{ m: 1, width: '25ch' }}
@@ -31,13 +31,13 @@ const Login = () => {
           startAdornment:
             <InputAdornment position="start">
               <AccountCircle />
-            </InputAdornment>,
+            </InputAdornment>
         }}
       />
       <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
         <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
         <OutlinedInput
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) => { setPassword(e.target.value) }}
           id="outlined-adornment-password"
           type={showPassword ? 'text' : 'password'}
           endAdornment={

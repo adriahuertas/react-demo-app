@@ -1,5 +1,5 @@
-import { useSelector } from "react-redux"
-import { selectError } from "../feature/error/errorSlice"
+import { useSelector } from 'react-redux'
+import { selectError } from '../feature/error/errorSlice'
 
 const Error = () => {
   const message = useSelector(selectError)

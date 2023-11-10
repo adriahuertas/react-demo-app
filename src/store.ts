@@ -1,7 +1,7 @@
-import { configureStore } from "@reduxjs/toolkit"
+import { configureStore } from '@reduxjs/toolkit'
 
-import userListReducer from "./feature/userList/userSlice"
-import errorReducer from "./feature/error/errorSlice"
+import userListReducer from './feature/userList/userSlice'
+import errorReducer from './feature/error/errorSlice'
 
 const store = configureStore({
   reducer: {
@@ -9,8 +9,8 @@ const store = configureStore({
     // comments: commentsReducer,
     // users: usersReducer
     userList: userListReducer,
-    error: errorReducer,
-  },
+    error: errorReducer
+  }
 })
 
 export default store

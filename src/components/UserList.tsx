@@ -1,11 +1,11 @@
-import { useSelector } from "react-redux"
-import { UserInterface } from "../interfaces/User"
-import User from "./User"
-import { Pagination } from "@mui/material"
-import { useState } from "react"
-import { selectUserList } from "../feature/userList/userSlice"
-import Filter from "./Filter"
-import { filterUsers } from "../utils"
+import { useSelector } from 'react-redux'
+import { type UserInterface } from '../interfaces/User'
+import User from './User'
+import { Pagination } from '@mui/material'
+import { useState } from 'react'
+import { selectUserList } from '../feature/userList/userSlice'
+import Filter from './Filter'
+import { filterUsers } from '../utils'
 
 // Display 6 users per page
 const WINDOW_SIZE = 6
@@ -14,7 +14,7 @@ const UserList = () => {
   // Get All users from redux
   const users = useSelector(selectUserList)
 
-  const [filter, setFilter] = useState("")
+  const [filter, setFilter] = useState('')
 
   // We only display 6 users per page
   const [usersToDisplay, setUsersToDisplay] = useState<UserInterface[]>(users.slice(0, 6))
@@ -31,8 +31,8 @@ const UserList = () => {
     setUsersToDisplay(users.slice((value - 1) * 6, value * 6))
     setFilteredUsersToDisplay(users.slice((value - 1) * 6, value * 6))
 
-    setFilter("")
-  };
+    setFilter('')
+  }
 
   const handleFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newFilter = event.target.value

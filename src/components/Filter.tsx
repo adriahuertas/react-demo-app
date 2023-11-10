@@ -1,9 +1,9 @@
-import { AccountCircle } from "@mui/icons-material"
-import { InputAdornment, TextField } from "@mui/material"
-import { FC } from "react"
+import { AccountCircle } from '@mui/icons-material'
+import { InputAdornment, TextField } from '@mui/material'
+import { type FC } from 'react'
 
 interface FilterProps {
-  handleFilterChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
+  handleFilterChange: (event: React.ChangeEvent<HTMLInputElement>) => void
   filterValue: string
 }
 
@@ -19,7 +19,7 @@ const Filter: FC<FilterProps> = ({ handleFilterChange, filterValue }) => {
           <InputAdornment position="start">
             <AccountCircle />
           </InputAdornment>
-        ),
+        )
       }}
       variant="standard"
     />

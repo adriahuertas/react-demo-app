@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import type { RootState } from "../../store"
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
+import type { RootState } from '../../store'
 
 /* errorSlice. We use this slice to manage the error message
  * that will be displayed in the Error component.
@@ -12,20 +12,20 @@ interface ErrorState {
 
 // Define the initial state using that type
 const initialState: ErrorState = {
-  message: "",
+  message: ''
 }
 
 export const errorSlice = createSlice({
-  name: "error",
+  name: 'error',
   initialState,
   reducers: {
     setMessage: (state, action: PayloadAction<string>) => {
       state.message = action.payload
     },
     clearMessage: (state) => {
-      state.message = ""
-    },
-  },
+      state.message = ''
+    }
+  }
 })
 
 export const { setMessage, clearMessage } = errorSlice.actions

@@ -7,7 +7,6 @@ import Error from './components/Error'
 import Navbar from './components/Navbar'
 
 function App() {
-
   return (
     <div className="application">
       <Navbar />
@@ -16,7 +15,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/users" element={<UserList />} />
         <Route path="/error" element={<Error />} />
-        // To remove later
+        {// To remove later
+        }
         <Route path="/fetch" element={<UserListFetch />} />
       </Routes>
     </div>
