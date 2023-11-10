@@ -9,19 +9,21 @@ import { Container } from '@mui/material'
 
 function App() {
   return (
-    <Container disableGutters sx={{ height: '100vh', minWidth: '100%' }}>
+    <Container disableGutters sx={{ height: '100vh', minWidth: '100%', display: 'grid', gridTemplateRows: 'auto 1fr' }}>
       <Navbar />
-      <Container disableGutters sx={{ height: '100vh', maxWidth: '1200px', marginTop: '20px', display: 'flex', justifyContent: 'center' }}>
-        < Routes >
-          <Route path="/" element={<div>Home</div>} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/users" element={<UserList />} />
-          <Route path="/error" element={<Error />} />
-          {// To remove later
-          }
-          <Route path="/fetch" element={<UserListFetch />} />
-        </Routes >
-      </Container >
+      <div id="background">
+        <Container disableGutters sx={{ maxWidth: '1500', paddingTop: '20px', display: 'flex', justifyContent: 'center' }}>
+          < Routes >
+            <Route path="/" element={<div>Home</div>} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/users" element={<UserList />} />
+            <Route path="/error" element={<Error />} />
+            {// To remove later
+            }
+            <Route path="/fetch" element={<UserListFetch />} />
+          </Routes >
+        </Container >
+      </div>
     </Container >
   )
 }
