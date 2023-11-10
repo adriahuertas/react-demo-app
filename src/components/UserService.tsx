@@ -4,6 +4,7 @@ import { useQuery } from "react-query";
 import { useDispatch } from "react-redux";
 import { setUsers } from "../feature/userList/userSlice";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const UserService = () => {
   const dispatch = useDispatch()
@@ -19,18 +20,22 @@ const UserService = () => {
     return userData;
   });
 
+  useEffect(() => {
+    if (!isLoading && !error && data) {
+      dispatch(setUsers(data.data))
+
+      // If no error, redirect to the user list
+      navigate("/users")
+    }
+  }, [isLoading, error, data, dispatch, navigate])
+
   if (isLoading) return "Loading..."
 
   if (error) return "An error has occurred: " + (error as Error).message
 
-  // We store the data in the redux store to be used elsewhere
-  dispatch(setUsers(data.data))
-
-  // If no error, redirect to the user list
-  navigate("/users")
-
-  // Never arrive here
+  // This component will render null because the redirection will happen in useEffect
   return null
 }
+
 
 export default UserService
