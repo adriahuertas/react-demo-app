@@ -5,6 +5,8 @@ import loginService from '../services/login'
 import { useDispatch } from 'react-redux'
 import { setUser } from '../reducers/loggedUserReducer'
 import { useNavigate } from 'react-router-dom'
+import { useLogin } from '../hooks'
+import GitHubIcon from '@mui/icons-material/GitHub'
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false)
@@ -50,6 +52,8 @@ const Login = () => {
     }
   }
 
+  const { login: handleGithubLogin, isPending } = useLogin()
+
   return (
     <Box>
 
@@ -92,7 +96,10 @@ const Login = () => {
         </FormControl>
         <Button type="submit" disabled={email.length === 0 || password.length === 0} variant="contained">Sign In</Button>
       </form>
-      {
+      <Button className="btn" onClick={handleGithubLogin} variant="contained">
+        <GitHubIcon sx={{ marginRight: '10px' }} />
+        {(isPending as boolean) ? 'Loading...' : 'Login With Github'}
+      </Button>      {
         error !== '' &&
         <div style={{ textAlign: 'center', width: '100%', color: 'red' }}>
           <small>{error}</small>

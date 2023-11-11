@@ -1,11 +1,15 @@
 import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
-import { clearUser, selectUserEmail, selectUserToken } from '../reducers/loggedUserReducer'
+import { clearLoggedWithGithub, clearUser, selectUserEmail, selectUserLoggedWithGithub, selectUserToken } from '../reducers/loggedUserReducer'
+import { signOut } from 'firebase/auth'
+import { auth } from '../firebase/config'
 
 function Navbar() {
   const token = useSelector(selectUserToken)
   const email = useSelector(selectUserEmail)
+
+  const loggedWithGithub = useSelector(selectUserLoggedWithGithub) as boolean
 
   const navigate = useNavigate()
 
@@ -13,10 +17,18 @@ function Navbar() {
 
   const isLogged = token !== ''
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     localStorage.removeItem('loggedUser')
     dispatch(clearUser())
     navigate('/')
+    if (loggedWithGithub) {
+      dispatch(clearLoggedWithGithub())
+      try {
+        await signOut(auth)
+      } catch {
+        console.log('Ups. Something went wrong with Github Sign out')
+      }
+    }
   }
 
   return (

@@ -8,12 +8,14 @@ import type { RootState } from '../store'
 interface loggedUserState {
   token: string
   email: string
+  loggedWithGithub?: boolean
 }
 
 // Define the initial state using that type
 const initialState: loggedUserState = {
   token: '',
-  email: ''
+  email: '',
+  loggedWithGithub: false
 }
 
 export const loggedUserSlice = createSlice({
@@ -34,13 +36,27 @@ export const loggedUserSlice = createSlice({
         state.token = JSON.parse(loggedUser).token
         state.email = JSON.parse(loggedUser).email
       }
+    },
+    setLoggedWithGithub: (state) => {
+      state.loggedWithGithub = true
+    },
+    clearLoggedWithGithub: (state) => {
+      state.loggedWithGithub = false
     }
   }
 })
 
-export const { setUser, clearUser, initializeUser } = loggedUserSlice.actions
+export const {
+  setUser,
+  clearUser,
+  initializeUser,
+  setLoggedWithGithub,
+  clearLoggedWithGithub
+} = loggedUserSlice.actions
 
 export const selectUserEmail = (state: RootState) => state.loggedUser.email
 export const selectUserToken = (state: RootState) => state.loggedUser.token
+export const selectUserLoggedWithGithub = (state: RootState) =>
+  state.loggedUser.loggedWithGithub
 
 export default loggedUserSlice.reducer
