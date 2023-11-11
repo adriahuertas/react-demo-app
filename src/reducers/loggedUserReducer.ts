@@ -41,5 +41,6 @@ export const loggedUserSlice = createSlice({
 export const { setUser, clearUser, initializeUser } = loggedUserSlice.actions
 
 export const selectUserEmail = (state: RootState) => state.loggedUser.email
+export const selectUserToken = (state: RootState) => state.loggedUser.token
 
 export default loggedUserSlice.reducer

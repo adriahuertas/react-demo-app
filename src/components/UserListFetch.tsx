@@ -2,13 +2,18 @@
 
 import { useQuery } from 'react-query'
 import { useDispatch } from 'react-redux'
-import { setUsers } from '../reducers/userListReducer'
+import { setFetchIsDone, setUsers } from '../reducers/userListReducer'
 import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import { setMessage } from '../reducers/errorReducer'
 import Loading from './Loading'
+import UserList from './UserList'
 
-const UserServiceFetch = () => {
+// This is the component that will be rendered when the user want to access to the user list
+// We use react query so that we can easily manage the loading and error states
+// Also, react query deals with caching, so we don't have to worry about that
+
+const UserListFetch = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -30,9 +35,7 @@ const UserServiceFetch = () => {
 
     if (!isLoading && error === null && data !== null) {
       dispatch(setUsers(data.data))
-
-      // If no error, redirect to the user list
-      navigate('/users')
+      dispatch(setFetchIsDone())
     }
   }, [isLoading, error, data, dispatch, navigate])
 
@@ -41,7 +44,7 @@ const UserServiceFetch = () => {
   }
 
   // This component will render null because the redirection will happen in useEffect
-  return null
+  return <UserList />
 }
 
-export default UserServiceFetch
+export default UserListFetch

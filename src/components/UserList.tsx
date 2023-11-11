@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux'
 import { type UserInterface } from '../interfaces/interfaces'
 import User from './User'
 import { Box, Pagination } from '@mui/material'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { selectUserList } from '../reducers/userListReducer'
 import Filter from './Filter'
 import { filterUsers } from '../utils'
@@ -17,11 +17,12 @@ const UserList = () => {
   const [filter, setFilter] = useState('')
 
   // We only display 6 users per page
-  const [usersToDisplay, setUsersToDisplay] = useState<UserInterface[]>(users.slice(0, 6))
-
+  const [usersToDisplay, setUsersToDisplay] = useState<UserInterface[] | null>(null)
+  console.log(usersToDisplay)
   // Filtered users to display
-  const [filteredUsersToDisplay, setFilteredUsersToDisplay] = useState<UserInterface[]>(usersToDisplay)
+  const [filteredUsersToDisplay, setFilteredUsersToDisplay] = useState<UserInterface[] | null>(null)
 
+  console.log(filteredUsersToDisplay)
   // Number of available pages
   const count = users.length / WINDOW_SIZE
 
@@ -42,20 +43,26 @@ const UserList = () => {
     setFilteredUsersToDisplay(filterUsers(usersToDisplay, newFilter))
   }
 
-  return (
-    <>
-      <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%', alignItems: 'center' }}>
-        <h2>Users</h2>
-        <Filter handleFilterChange={handleFilterChange} filterValue={filter} />
-        {
-          filteredUsersToDisplay.map((user: UserInterface) => (
-            <User user={user} key={user.email} />
-          ))
-        }
-        <Pagination count={count} color="primary" onChange={handlePageChange} />
-      </Box>
-    </>
-  )
+  useEffect(() => {
+    setUsersToDisplay(users.slice(0, WINDOW_SIZE))
+    setFilteredUsersToDisplay(users.slice(0, WINDOW_SIZE))
+  }, [users])
+
+  return filteredUsersToDisplay !== null
+    ? (
+      <>
+        <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%', alignItems: 'center' }}>
+          <h2>Users</h2>
+          <Filter handleFilterChange={handleFilterChange} filterValue={filter} />
+          {
+            filteredUsersToDisplay.map((user: UserInterface) => (
+              <User user={user} key={user.email} />
+            ))
+          }
+          <Pagination count={count} color="primary" onChange={handlePageChange} />
+        </Box>
+      </>)
+    : null
 }
 
 export default UserList

@@ -4,6 +4,7 @@ import { type SyntheticEvent, useState } from 'react'
 import loginService from '../services/login'
 import { useDispatch } from 'react-redux'
 import { setUser } from '../reducers/loggedUserReducer'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false)
@@ -14,6 +15,7 @@ const Login = () => {
   const [error, setError] = useState('')
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const handleClickShowPassword = () => { setShowPassword((show) => !show) }
 
@@ -24,6 +26,10 @@ const Login = () => {
   const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault()
     const credentials = { email, password }
+
+    // Clear the form
+    setEmail('')
+    setPassword('')
 
     const token = await loginService.login(credentials)
 
@@ -39,11 +45,9 @@ const Login = () => {
       localStorage.setItem('loggedUser', JSON.stringify({ token, email }))
       // Set user state
       dispatch(setUser({ token, email }))
+      // Redirect to home
+      navigate('/')
     }
-
-    // Clear the form
-    setEmail('')
-    setPassword('')
   }
 
   return (

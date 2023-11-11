@@ -9,11 +9,13 @@ import { type UserInterface } from '../interfaces/interfaces'
 // Define a type for the slice state
 interface UserListState {
   users: UserInterface[]
+  fetchIsDone: boolean
 }
 
 // Define the initial state using that type
 const initialState: UserListState = {
-  users: []
+  users: [],
+  fetchIsDone: false
 }
 
 export const userSlice = createSlice({
@@ -25,12 +27,18 @@ export const userSlice = createSlice({
     },
     clearUsers: (state) => {
       state.users = []
+    },
+    // This is used in case there are no users to know if the fetch is yet to be done or the API returned an empty array
+    setFetchIsDone: (state) => {
+      state.fetchIsDone = true
     }
   }
 })
 
-export const { setUsers, clearUsers } = userSlice.actions
+export const { setUsers, clearUsers, setFetchIsDone } = userSlice.actions
 
 export const selectUserList = (state: RootState) => state.userList.users
+export const selectFetchIdDone = (state: RootState) =>
+  state.userList.fetchIsDone
 
 export default userSlice.reducer

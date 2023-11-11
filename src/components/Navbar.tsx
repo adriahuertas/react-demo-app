@@ -1,25 +1,31 @@
 import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { clearUser, selectUserEmail } from '../reducers/loggedUserReducer'
+import { Link, useNavigate } from 'react-router-dom'
+import { clearUser, selectUserEmail, selectUserToken } from '../reducers/loggedUserReducer'
 
 function Navbar() {
+  const token = useSelector(selectUserToken)
   const email = useSelector(selectUserEmail)
+
+  const navigate = useNavigate()
+
   const dispatch = useDispatch()
 
-  const isLogged = email !== ''
+  const isLogged = token !== ''
 
   const handleLogout = () => {
     localStorage.removeItem('loggedUser')
     dispatch(clearUser())
+    navigate('/')
   }
 
   return (
     <AppBar position="static" sx={{ width: '100%' }}>
       <Toolbar>
-        {/* Título del AppBar */}
         <Typography variant="h6" sx={{ userSelect: 'none' }}>
-          React Demo APP
+          <Link to="/" style={{ textDecoration: 'none', color: 'white' }}>
+            React Demo APP
+          </Link>
         </Typography>
 
         {/* Botones de Login y Users */}
@@ -29,14 +35,15 @@ function Navbar() {
               Users
             </Link>
           </Button>
-          <Button color="inherit">
-            <Link to="/login" style={{ textDecoration: 'none', color: 'white' }}>
-              Login
-            </Link>
-          </Button>
-          <Button color="inherit" onClick={handleLogout}>
-            Logout
-          </Button>
+          {isLogged
+            ? (<Button color="inherit" onClick={handleLogout}>
+              Logout
+            </Button>)
+            : (<Button color="inherit">
+              <Link to="/login" style={{ textDecoration: 'none', color: 'white' }}>
+                Login
+              </Link>
+            </Button>)}
         </Box>
         {isLogged && <small style={{ marginLeft: '25px' }}>Logged in as {email}</small>}
       </Toolbar>
