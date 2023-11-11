@@ -18,11 +18,9 @@ const UserList = () => {
 
   // We only display 6 users per page
   const [usersToDisplay, setUsersToDisplay] = useState<UserInterface[] | null>(null)
-  console.log(usersToDisplay)
   // Filtered users to display
   const [filteredUsersToDisplay, setFilteredUsersToDisplay] = useState<UserInterface[] | null>(null)
 
-  console.log(filteredUsersToDisplay)
   // Number of available pages
   const count = users.length / WINDOW_SIZE
 

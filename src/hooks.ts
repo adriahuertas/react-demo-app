@@ -40,15 +40,12 @@ export const useLogin = () => {
       const user = res.user
       const token = (user as any).accessToken
       const email = user.email as string
-      console.log(user)
-      console.log(email)
       setIsPending(false)
       dispatch(setUser({ token, email }))
       dispatch(setLoggedWithGithub())
       localStorage.setItem('loggedUser', JSON.stringify({ token, email }))
       navigate('/')
     } catch (error) {
-      console.log(error)
       setError((error as Error).message)
       setIsPending(false)
     }

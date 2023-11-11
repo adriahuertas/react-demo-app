@@ -8,8 +8,6 @@ const login = async (credentials: Credentials) => {
     const response = await axios.post(baseUrl, credentials)
     return response.data
   } catch (error: any) {
-    console.log('Error en la identificación')
-    console.log(error.response.data.error)
     return null
   }
 }
