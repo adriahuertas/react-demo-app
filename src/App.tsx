@@ -6,8 +6,14 @@ import UserListFetch from './components/UserListFetch'
 import Error from './components/Error'
 import Navbar from './components/Navbar'
 import { Container } from '@mui/material'
+import { useDispatch } from 'react-redux'
+import { initializeUser } from './reducers/loggedUserReducer'
 
 function App() {
+  // Inicializamos el usuario al cargar la app
+  const dispatch = useDispatch()
+  dispatch(initializeUser())
+
   return (
     <Container disableGutters sx={{ height: '100vh', minWidth: '100%', display: 'grid', gridTemplateRows: 'auto 1fr' }}>
       <Navbar />

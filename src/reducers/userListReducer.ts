@@ -1,6 +1,6 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
-import type { RootState } from '../../store'
-import { type UserInterface } from '../../interfaces/User'
+import type { RootState } from '../store'
+import { type UserInterface } from '../interfaces/interfaces'
 
 /* userSlice. We use this slice only to store the list of users.
  * The filtering will be done in the UserList component with the useState hook.

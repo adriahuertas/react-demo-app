@@ -1,4 +1,4 @@
-import { type UserInterface } from '../interfaces/User'
+import { type UserInterface } from '../interfaces/interfaces'
 
 const User = ({ user }: { user: UserInterface }) => {
   const { avatar, first_name: firstName, last_name: lastName, email } = user

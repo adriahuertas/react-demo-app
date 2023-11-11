@@ -1,5 +1,5 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
-import type { RootState } from '../../store'
+import type { RootState } from '../store'
 
 /* errorSlice. We use this slice to manage the error message
  * that will be displayed in the Error component.

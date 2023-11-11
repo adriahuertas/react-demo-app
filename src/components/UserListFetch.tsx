@@ -2,10 +2,10 @@
 
 import { useQuery } from 'react-query'
 import { useDispatch } from 'react-redux'
-import { setUsers } from '../feature/userList/userSlice'
+import { setUsers } from '../reducers/userListReducer'
 import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
-import { setMessage } from '../feature/error/errorSlice'
+import { setMessage } from '../reducers/errorReducer'
 import Loading from './Loading'
 
 const UserServiceFetch = () => {

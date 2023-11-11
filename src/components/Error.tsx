@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { selectError, setMessage } from '../feature/error/errorSlice'
+import { selectError, setMessage } from '../reducers/errorReducer'
 import { useEffect } from 'react'
 
 const Error = () => {
