@@ -32,9 +32,9 @@ function Navbar() {
   }
 
   return (
-    <AppBar position="static" sx={{ width: '100%' }}>
+    <AppBar position="sticky" sx={{ width: '100%' }}>
       <Toolbar>
-        <Typography variant="h6" sx={{ userSelect: 'none' }}>
+        <Typography variant="h6" sx={{ userSelect: 'none', fontSize: { xs: 12, sm: 18 } }}>
           <Link to="/" style={{ textDecoration: 'none', color: 'white' }}>
             React Demo APP
           </Link>

@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux'
 import { type UserInterface } from '../interfaces/interfaces'
 import User from './User'
-import { Box, Pagination } from '@mui/material'
+import { Box, Container, Pagination } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { selectUserList } from '../reducers/userListReducer'
 import Filter from './Filter'
@@ -52,14 +52,21 @@ const UserList = () => {
     ? (
       <>
         <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%', alignItems: 'center' }}>
-          <h2>Users</h2>
-          <Filter handleFilterChange={handleFilterChange} filterValue={filter} />
-          {
-            filteredUsersToDisplay.map((user: UserInterface) => (
-              <User user={user} key={user.email} />
-            ))
-          }
-          <Pagination count={count} color="primary" onChange={handlePageChange} />
+          <div style={{ marginBottom: '25px' }}>
+            <h2>Estos usuarios podrían gustarte</h2>
+          </div>
+          <div style={{ marginBottom: '25px' }}>
+            <Filter handleFilterChange={handleFilterChange} filterValue={filter} />
+          </div>
+          <Container sx={{ width: '100%', display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '35px' }}>
+            {
+
+              filteredUsersToDisplay.map((user: UserInterface) => (
+                <User user={user} key={user.email} />
+              ))
+            }
+          </Container>
+          <Pagination sx={{ marginTop: '25px', marginBottom: '25px' }} count={count} color="primary" onChange={handlePageChange} />
         </Box>
       </>)
     : null

@@ -13,6 +13,7 @@ import {
 import { auth } from './firebase/config'
 import { useState } from 'react'
 import { setLoggedWithGithub, setUser } from './reducers/loggedUserReducer'
+import { useNavigate } from 'react-router-dom'
 
 // Use throughout your app instead of plain `useDispatch` and `useSelector`
 export const useAppDispatch: () => AppDispatch = useDispatch
@@ -24,6 +25,7 @@ export const useLogin = () => {
   const [isPending, setIsPending] = useState<boolean | null>(false)
   const dispatch = useDispatch()
   const provider = new GithubAuthProvider()
+  const navigate = useNavigate()
 
   const login = async () => {
     setError(null)
@@ -36,7 +38,7 @@ export const useLogin = () => {
       }
 
       const user = res.user
-      const token = user.accessToken
+      const token = (user as any).accessToken
       const email = user.email as string
       console.log(user)
       console.log(email)
@@ -44,6 +46,7 @@ export const useLogin = () => {
       dispatch(setUser({ token, email }))
       dispatch(setLoggedWithGithub())
       localStorage.setItem('loggedUser', JSON.stringify({ token, email }))
+      navigate('/')
     } catch (error) {
       console.log(error)
       setError((error as Error).message)

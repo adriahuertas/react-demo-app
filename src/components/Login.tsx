@@ -55,56 +55,61 @@ const Login = () => {
   const { login: handleGithubLogin, isPending } = useLogin()
 
   return (
-    <Box>
-
-      <form onSubmit={handleSubmit}>
-        <TextField
-          label="Email"
-          onChange={(e) => { setEmail(e.target.value) }}
-          value={email}
-          placeholder="user@example.com"
-          id="outlined-start-adornment"
-          sx={{ m: 1, width: '25ch' }}
-          InputProps={{
-            startAdornment:
-              <InputAdornment position="start">
-                <AccountCircle />
-              </InputAdornment>
-          }}
-        />
-        <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-          <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-          <OutlinedInput
-            onChange={(e) => { setPassword(e.target.value) }}
-            id="outlined-adornment-password"
-            type={showPassword ? 'text' : 'password'}
-            value={password}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword}
-                  onMouseDown={handleMouseDownPassword}
-                  edge="end"
-                >
-                  {showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            }
-            label="Password"
+    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <h2 style={{ textAlign: 'center', marginBottom: '50px' }}>Inicia sesión para acceder a la lista de usuarios</h2>
+      <Box sx={{ maxWidth: '400px', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <form onSubmit={handleSubmit}>
+          <TextField
+            label="Email"
+            onChange={(e) => { setEmail(e.target.value) }}
+            value={email}
+            placeholder="user@example.com"
+            id="outlined-start-adornment"
+            sx={{ mb: 2 }}
+            fullWidth
+            InputProps={{
+              startAdornment:
+                <InputAdornment position="start">
+                  <AccountCircle />
+                </InputAdornment>
+            }}
           />
-        </FormControl>
-        <Button type="submit" disabled={email.length === 0 || password.length === 0} variant="contained">Sign In</Button>
-      </form>
-      <Button className="btn" onClick={handleGithubLogin} variant="contained">
-        <GitHubIcon sx={{ marginRight: '10px' }} />
-        {(isPending as boolean) ? 'Loading...' : 'Login With Github'}
-      </Button>      {
-        error !== '' &&
-        <div style={{ textAlign: 'center', width: '100%', color: 'red' }}>
-          <small>{error}</small>
-        </div>
-      }
+          <FormControl sx={{ mb: 2 }} variant="outlined" fullWidth>
+            <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+            <OutlinedInput
+
+              onChange={(e) => { setPassword(e.target.value) }}
+              id="outlined-adornment-password"
+              type={showPassword ? 'text' : 'password'}
+              value={password}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    edge="end"
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
+              label="Password"
+            />
+          </FormControl>
+          <Button fullWidth sx={{ mb: 2, height: '56px' }} type="submit" disabled={email.length === 0 || password.length === 0} variant="contained">Sign In</Button>
+          <Button sx={{ mb: 2, height: '56px' }} fullWidth className="btn" onClick={handleGithubLogin} variant="contained">
+            <GitHubIcon sx={{ marginRight: '10px' }} />
+            {(isPending as boolean) ? 'Loading...' : 'Login With Github'}
+          </Button>
+        </form>
+        {
+          error !== '' &&
+          <div style={{ textAlign: 'center', width: '100%', color: 'red' }}>
+            <small>{error}</small>
+          </div>
+        }
+      </Box>
     </Box>
   )
 }
