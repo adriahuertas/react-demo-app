@@ -67,6 +67,7 @@ const Login = () => {
             id="outlined-start-adornment"
             sx={{ mb: 2 }}
             fullWidth
+            name="email"
             InputProps={{
               startAdornment:
                 <InputAdornment position="start">
@@ -82,6 +83,7 @@ const Login = () => {
               id="outlined-adornment-password"
               type={showPassword ? 'text' : 'password'}
               value={password}
+              name="password"
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton

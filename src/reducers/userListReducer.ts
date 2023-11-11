@@ -28,7 +28,7 @@ export const userSlice = createSlice({
     clearUsers: (state) => {
       state.users = []
     },
-    // This is used in case there are no users to know if the fetch is yet to be done or the API returned an empty array
+    // This is used, in case there are no users, to know if the fetch is yet to be done or the API returned an empty array
     setFetchIsDone: (state) => {
       state.fetchIsDone = true
     }

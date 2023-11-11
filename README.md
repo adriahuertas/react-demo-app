@@ -47,6 +47,24 @@ Para definir los estilos se ha utilitzado MaterialUI.
 
 La aplicación se ha desplegado a traves de Vercel. [Link](https://react-demo-app-pink.vercel.app/)
 
+## Testing
+
+A modo de ejemplo, se han añadido un par de testos unitarios y un par de testos e2e
+
+### Testos unitarios
+
+- Los testos unitarios se han configurado con vitest en el archivo App.test.tsx.
+- El comando para ejecutarlos es npm test.
+
+![Unit testing](./public/unit_testing.png)
+
+### Testos e2e
+
+- Los testos e2e se han hecho con cypress en el archivo demo_app.cy.ts.
+- El comando para ejecutarlos es npm run cy:run.
+
+![e2e testing](./public/cypress.png)
+
 ## Diseño responsivo
 
 Para hacer un diseño responsivo se ha utilizado, mediante MaterialUI, un diseño basado en contendores flex.  
@@ -62,7 +80,7 @@ Así, en función del ancho de pantalla se muestran 3, 2 o 1 usuario por fila.
 
 ![Dos usuarios por fila](./public/2_por_fila.png)
 
-### 1 usuarios por fila
+### 1 usuario por fila
 
 ![Un usuarios por fila](./public/1_por_fila.png)
 

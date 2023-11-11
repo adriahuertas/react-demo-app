@@ -5,3 +5,9 @@
 node_modules/
 
 index.html
+
+# Ignore build files
+dist/
+
+# Ignore cypress
+cypress/
