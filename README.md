@@ -1,3 +1,71 @@
 # React Demo App
 
-Esto es una aplicación de demostración hecha con React/Vite
+Esto es una aplicación de demostración hecha con React, Vite y Typescript.
+
+## Gestor de paquetes
+
+Se ha utilizado PNPM como gestor de paquetes.
+
+## Formateador de código
+
+Se ha usado eslint como formateador de código y se ha seguido el estilo Standard de Javascript,  
+desactivando algunas reglas molestas cuando se usa react (pueden verse en el fichero .eslintrc.json).
+
+## Formulario de login
+
+En el formulario de login no se ha implementado validación para el email y el password por simplicidad
+
+## Autenticación
+
+La autenticación hace un POST a la API https://reqres.in/api/login. Para logearse se puede usar  
+el email eve.holt@reqres.in con cualquier contraseña. En caso de introducir credenciales erroneas  
+se muestra un mensaje de error durante 5 segundos. En caso de logearse correctamente, se guarda  
+el token recibido y el email en el estado de la aplicación. Mientras exista ese token, se asume  
+que el usuario está identificado. Además, se guarda esta información en localStorage para mantener  
+la sesión en caso de recargar la aplicación. El Logout elimina la información del usuario tanto  
+del estado global como del localStorage.
+
+## Autenticación con GitHub. Extra
+
+Adicionalmente, se ha añadido autenticación con GitHub mediante Firebase.
+
+## Gestión del estado
+
+Para gestionar el estado global se ha usado React Redux. Para mantener el estado local de los componentes  
+se usa useState.
+
+## Fetching de datos
+
+Para hacer el fetching de datos se ha optado por React Query para poder gestionar fácilmente los estados  
+de error y loading.
+
+## Estilos
+
+Para definir los estilos se ha utilitzado MaterialUI.
+
+## Despliegue
+
+La aplicación se ha desplegado a traves de Vercel. [Link](https://react-demo-app-pink.vercel.app/)
+
+## Diseño responsivo
+
+Para hacer un diseño responsivo se ha utilizado, mediante MaterialUI, un diseño basado en contendores flex.  
+Así, en función del ancho de pantalla se muestran 3, 2 o 1 usuario por fila.
+
+## Capturas de pantalla
+
+### 3 usuarios por fila
+
+![Tres usuarios por fila](./public/3_por_fila.png)
+
+### 2 usuarios por fila
+
+![Dos usuarios por fila](./public/2_por_fila.png)
+
+### 1 usuarios por fila
+
+![Un usuarios por fila](./public/1_por_fila.png)
+
+### Formulario de login
+
+![Formulario de Login](./public/formulario.png)
