@@ -45,7 +45,7 @@ Para definir los estilos se ha utilitzado MaterialUI.
 
 ## Despliegue
 
-La aplicación se ha desplegado a traves de Vercel. [Link](https://react-demo-app-pink.vercel.app/)
+La aplicación se ha desplegado en Vercel. [Link](https://react-demo-app-pink.vercel.app/)
 
 ## Testing
 
