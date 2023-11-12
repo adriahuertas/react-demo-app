@@ -30,7 +30,7 @@ function App() {
       <Container disableGutters sx={{ maxWidth: '1300', paddingTop: '50px', display: 'flex', justifyContent: 'center' }}>
         < Routes >
           <Route path="/" element={isLogged ? <UserListFetch /> : <Login />} />
-          <Route path="/login" element={isLogged ? null : <Login />} />
+          <Route path="/login" element={isLogged ? <UserListFetch /> : <Login />} />
           <Route path="/users" element={isLogged ? <UserListFetch /> : <Login />} />
           <Route path="/error" element={isError ? <Error /> : null} />
         </Routes >
