@@ -49,18 +49,18 @@ La aplicación se ha desplegado en Vercel. [Link](https://react-demo-app-pink.ve
 
 ## Testing
 
-A modo de ejemplo, se han añadido un par de testos unitarios y un par de testos e2e
+A modo de ejemplo, se han añadido un par de test unitarios y un par de test e2e
 
-### Testos unitarios
+### Test unitarios
 
-- Los testos unitarios se han configurado con vitest en el archivo App.test.tsx.
+- Los test unitarios se han configurado con vitest en el archivo App.test.tsx.
 - El comando para ejecutarlos es npm test.
 
 ![Unit testing](./public/unit_testing.png)
 
-### Testos e2e
+### Test e2e
 
-- Los testos e2e se han hecho con cypress en el archivo demo_app.cy.ts.
+- Los test e2e se han hecho con cypress en el archivo demo_app.cy.ts.
 - El comando para ejecutarlos es npm run cy:run.
 
 ![e2e testing](./public/cypress.png)
