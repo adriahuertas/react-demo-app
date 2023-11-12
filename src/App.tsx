@@ -7,7 +7,6 @@ import { Container } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { initializeUser, selectUserToken } from './reducers/loggedUserReducer'
 import { useEffect } from 'react'
-import { selectError } from './reducers/errorReducer'
 import UserListFetch from './components/UserListFetch'
 
 function App() {
@@ -19,10 +18,8 @@ function App() {
   }, [dispatch])
 
   const token = useSelector(selectUserToken)
-  const errorMessage = useSelector(selectError)
 
   const isLogged = token !== ''
-  const isError = errorMessage !== ''
 
   return (
     <Container disableGutters sx={{ height: '100vh', minWidth: '100%', display: 'grid', gridTemplateRows: 'auto 1fr' }}>
@@ -32,7 +29,6 @@ function App() {
           <Route path="/" element={isLogged ? <UserListFetch /> : <Login />} />
           <Route path="/login" element={isLogged ? <UserListFetch /> : <Login />} />
           <Route path="/users" element={isLogged ? <UserListFetch /> : <Login />} />
-          {isError && <Route path="/error" element={<Error />} />}
           <Route path="*" element={<Navigate to="/" />} />
         </Routes >
       </Container >
