@@ -1,7 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 import './App.css'
 import Login from './components/Login'
-import Error from './components/Error'
 import Navbar from './components/Navbar'
 import { Container } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'

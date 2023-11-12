@@ -87,3 +87,7 @@ Así, en función del ancho de pantalla se muestran 3, 2 o 1 usuario por fila.
 ### Formulario de login
 
 ![Formulario de Login](./public/formulario.png)
+
+### Error conectando con la API al obtener los usuarios
+
+![Error en la API](./public/error.png)
