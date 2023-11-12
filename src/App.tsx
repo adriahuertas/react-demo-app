@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import './App.css'
 import Login from './components/Login'
 import Error from './components/Error'
@@ -32,7 +32,8 @@ function App() {
           <Route path="/" element={isLogged ? <UserListFetch /> : <Login />} />
           <Route path="/login" element={isLogged ? <UserListFetch /> : <Login />} />
           <Route path="/users" element={isLogged ? <UserListFetch /> : <Login />} />
-          <Route path="/error" element={isError ? <Error /> : null} />
+          {isError && <Route path="/error" element={<Error />} />}
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes >
       </Container >
     </Container >
