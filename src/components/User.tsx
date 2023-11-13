@@ -15,9 +15,8 @@ const User = ({ user }: { user: UserInterface }) => {
   }
 
   return (
-    <div style={{ backgroundColor: 'rgba(0,0,0, 0.1)' }} >
+    <Box sx={{ backgroundColor: 'rgba(0,0,0, 0.1)', minWidth: { xs: 'none', sm: '350px' } }} >
       <Card sx={{
-        minWidth: '350px',
         display: 'flex',
         padding: '20px',
         transition: 'transform 0.3s ease',
@@ -35,7 +34,7 @@ const User = ({ user }: { user: UserInterface }) => {
           </div>
         </Box>
       </Card >
-    </div>
+    </Box>
   )
 }
 

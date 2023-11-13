@@ -23,7 +23,7 @@ function App() {
   return (
     <Container disableGutters sx={{ height: '100vh', minWidth: '100%', display: 'grid', gridTemplateRows: 'auto 1fr' }}>
       <Navbar />
-      <Container disableGutters sx={{ maxWidth: '1300', paddingTop: '100px', display: 'flex', justifyContent: 'center' }}>
+      <Container disableGutters sx={{ maxWidth: '1300', paddingTop: '100px', display: 'flex', justifyContent: 'center', pl: '10px', pr: '10px' }}>
         < Routes >
           <Route path="/" element={isLogged ? <UserListFetch /> : <Login />} />
           <Route path="/login" element={isLogged ? <UserListFetch /> : <Login />} />
