@@ -18,33 +18,6 @@ const Login = () => {
     event.preventDefault()
   }
 
-  // const handleSubmit = async (e: SyntheticEvent) => {
-  //   e.preventDefault()
-  //   const credentials = { email, password }
-
-  //   // Clear the form
-  //   setEmail('')
-  //   setPassword('')
-
-  //   const token = await loginService.login(credentials)
-
-  //   if (token === null) {
-  //     // Error
-  //     setError('Error en el login. El email o la contraseña son incorrectos o el usuario no existe')
-  //     // Error displayed for 5 seconds only
-  //     setTimeout(() => {
-  //       setError('')
-  //     }, 5000)
-  //   } else {
-  //     // Save user in localstorage
-  //     localStorage.setItem('loggedUser', JSON.stringify({ token, email }))
-  //     // Set user state
-  //     dispatch(setUser({ token, email }))
-  //     // Redirect to home
-  //     navigate('/')
-  //   }
-  // }
-
   const { login: handleEmailLogin, isPending: isEmailPending, isError } = useEmailLogin()
 
   const handleSubmit = (e: SyntheticEvent) => {
