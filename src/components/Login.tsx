@@ -32,11 +32,11 @@ const Login = () => {
   useEffect(() => {
     if (isError) {
       // Error
-      setError('Error en el login. El email o la contraseña son incorrectos o el usuario no existe')
-      // Error displayed for 5 seconds only
+      setError('Error en el login. El email o la contraseña son incorrectos o el usuario no existe. Puedes usar el email eve.holt@reqres.in con cualquier contraseña para probarlo.')
+      // Error displayed for 8 seconds only
       setTimeout(() => {
         setError('')
-      }, 5000)
+      }, 8000)
     }
     if (!isEmailPending) {
       // Clear the form

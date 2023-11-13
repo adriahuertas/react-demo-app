@@ -19,7 +19,7 @@ En el formulario de login no se ha implementado validación para el email y el p
 
 La autenticación hace un POST a la API https://reqres.in/api/login. Para logearse se puede usar  
 el email eve.holt@reqres.in con cualquier contraseña. En caso de introducir credenciales erroneas  
-se muestra un mensaje de error durante 5 segundos. En caso de logearse correctamente, se guarda  
+se muestra un mensaje de error durante 8 segundos. En caso de logearse correctamente, se guarda  
 el token recibido y el email en el estado de la aplicación. Mientras exista ese token, se asume  
 que el usuario está identificado. Además, se guarda esta información en localStorage para mantener  
 la sesión en caso de recargar la aplicación. El Logout elimina la información del usuario tanto  
