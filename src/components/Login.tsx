@@ -1,11 +1,7 @@
 import { AccountCircle, Visibility, VisibilityOff } from '@mui/icons-material'
 import { Box, Button, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField } from '@mui/material'
-import { type SyntheticEvent, useState } from 'react'
-import loginService from '../services/login'
-import { useDispatch } from 'react-redux'
-import { setUser } from '../reducers/loggedUserReducer'
-import { useNavigate } from 'react-router-dom'
-import { useLogin } from '../hooks'
+import { type SyntheticEvent, useState, useEffect } from 'react'
+import { useEmailLogin, useLogin } from '../hooks'
 import GitHubIcon from '@mui/icons-material/GitHub'
 
 const Login = () => {
@@ -16,41 +12,64 @@ const Login = () => {
   // This is a local error state, not the global error state, used to display errors in login
   const [error, setError] = useState('')
 
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-
   const handleClickShowPassword = () => { setShowPassword((show) => !show) }
 
   const handleMouseDownPassword = (event: SyntheticEvent) => {
     event.preventDefault()
   }
 
-  const handleSubmit = async (e: SyntheticEvent) => {
+  // const handleSubmit = async (e: SyntheticEvent) => {
+  //   e.preventDefault()
+  //   const credentials = { email, password }
+
+  //   // Clear the form
+  //   setEmail('')
+  //   setPassword('')
+
+  //   const token = await loginService.login(credentials)
+
+  //   if (token === null) {
+  //     // Error
+  //     setError('Error en el login. El email o la contraseña son incorrectos o el usuario no existe')
+  //     // Error displayed for 5 seconds only
+  //     setTimeout(() => {
+  //       setError('')
+  //     }, 5000)
+  //   } else {
+  //     // Save user in localstorage
+  //     localStorage.setItem('loggedUser', JSON.stringify({ token, email }))
+  //     // Set user state
+  //     dispatch(setUser({ token, email }))
+  //     // Redirect to home
+  //     navigate('/')
+  //   }
+  // }
+
+  const { login: handleEmailLogin, isPending: isEmailPending, isError } = useEmailLogin()
+
+  const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault()
+
     const credentials = { email, password }
+
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    handleEmailLogin(credentials)
 
     // Clear the form
     setEmail('')
     setPassword('')
+  }
 
-    const token = await loginService.login(credentials)
-
-    if (token === null) {
+  useEffect(() => {
+    if (isError) {
       // Error
       setError('Error en el login. El email o la contraseña son incorrectos o el usuario no existe')
       // Error displayed for 5 seconds only
       setTimeout(() => {
         setError('')
       }, 5000)
-    } else {
-      // Save user in localstorage
-      localStorage.setItem('loggedUser', JSON.stringify({ token, email }))
-      // Set user state
-      dispatch(setUser({ token, email }))
-      // Redirect to home
-      navigate('/')
     }
-  }
+  }, [isError])
 
   const { login: handleGithubLogin, isPending } = useLogin()
 
@@ -99,7 +118,12 @@ const Login = () => {
               label="Password"
             />
           </FormControl>
-          <Button fullWidth sx={{ mb: 2, height: '56px' }} type="submit" disabled={email.length === 0 || password.length === 0} variant="contained">Iniciar sesión con Email</Button>
+          <Button
+            fullWidth sx={{ mb: 2, height: '56px' }}
+            type="submit"
+            disabled={email.length === 0 || password.length === 0}
+            variant="contained">
+            {isEmailPending ? 'CARGANDO' : 'Iniciar sesión con Email'}</Button>
           <Button sx={{ mb: 2, height: '56px' }} fullWidth className="btn" onClick={handleGithubLogin} variant="contained">
             <GitHubIcon sx={{ marginRight: '10px' }} />
             {(isPending as boolean) ? 'Cargando...' : 'Iniciar sesión con Github'}

@@ -4,6 +4,7 @@ import {
   useSelector
 } from 'react-redux'
 import type { RootState, AppDispatch } from './store'
+import loginService from './services/login'
 
 import {
   GithubAuthProvider,
@@ -14,10 +15,40 @@ import { auth } from './firebase/config'
 import { useState } from 'react'
 import { setLoggedWithGithub, setUser } from './reducers/loggedUserReducer'
 import { useNavigate } from 'react-router-dom'
+import { type Credentials } from './interfaces/interfaces'
 
 // Use throughout your app instead of plain `useDispatch` and `useSelector`
 export const useAppDispatch: () => AppDispatch = useDispatch
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
+
+// Hook to login through email and password
+export const useEmailLogin = () => {
+  const [isError, setIsError] = useState<boolean>(false)
+  const [isPending, setIsPending] = useState<boolean>(false)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const login = async (credentials: Credentials) => {
+    setIsError(false)
+    setIsPending(true)
+    try {
+      const token = await loginService.login(credentials)
+      if (token === null) {
+        setIsError(true)
+      } else {
+        const { email } = credentials
+        dispatch(setUser({ token, email }))
+        localStorage.setItem('loggedUser', JSON.stringify({ token, email }))
+        navigate('/')
+      }
+      setIsPending(false)
+    } catch (error) {
+      setIsError(true)
+      setIsPending(false)
+    }
+  }
+  return { login, isError, isPending }
+}
 
 // Hook to login with Github
 export const useLogin = () => {
