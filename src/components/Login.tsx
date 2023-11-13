@@ -54,10 +54,6 @@ const Login = () => {
 
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     handleEmailLogin(credentials)
-
-    // Clear the form
-    setEmail('')
-    setPassword('')
   }
 
   useEffect(() => {
@@ -69,7 +65,12 @@ const Login = () => {
         setError('')
       }, 5000)
     }
-  }, [isError])
+    if (!isEmailPending) {
+      // Clear the form
+      setEmail('')
+      setPassword('')
+    }
+  }, [isError, isEmailPending])
 
   const { login: handleGithubLogin, isPending } = useLogin()
 

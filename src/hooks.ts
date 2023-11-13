@@ -41,9 +41,9 @@ export const useEmailLogin = () => {
         localStorage.setItem('loggedUser', JSON.stringify({ token, email }))
         navigate('/')
       }
-      setIsPending(false)
     } catch (error) {
       setIsError(true)
+    } finally {
       setIsPending(false)
     }
   }
