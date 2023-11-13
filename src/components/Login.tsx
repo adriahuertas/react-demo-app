@@ -99,10 +99,10 @@ const Login = () => {
               label="Password"
             />
           </FormControl>
-          <Button fullWidth sx={{ mb: 2, height: '56px' }} type="submit" disabled={email.length === 0 || password.length === 0} variant="contained">Sign In</Button>
+          <Button fullWidth sx={{ mb: 2, height: '56px' }} type="submit" disabled={email.length === 0 || password.length === 0} variant="contained">Iniciar sesión con Email</Button>
           <Button sx={{ mb: 2, height: '56px' }} fullWidth className="btn" onClick={handleGithubLogin} variant="contained">
             <GitHubIcon sx={{ marginRight: '10px' }} />
-            {(isPending as boolean) ? 'Loading...' : 'Login With Github'}
+            {(isPending as boolean) ? 'Cargando...' : 'Iniciar sesión con Github'}
           </Button>
         </form>
         {

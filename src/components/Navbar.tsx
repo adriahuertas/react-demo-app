@@ -44,12 +44,12 @@ function Navbar() {
         <Box sx={{ display: 'flex', justifyContent: 'flex-end', flexGrow: 1 }}>
           <Button color="inherit">
             <Link to="/users" style={{ textDecoration: 'none', color: 'white' }}>
-              Users
+              Usuarios
             </Link>
           </Button>
           {isLogged
             ? (<Button color="inherit" onClick={handleLogout}>
-              Logout
+              Cerrar sesión
             </Button>)
             : (<Button color="inherit">
               <Link to="/login" style={{ textDecoration: 'none', color: 'white' }}>
@@ -57,7 +57,7 @@ function Navbar() {
               </Link>
             </Button>)}
         </Box>
-        {isLogged && <small style={{ marginLeft: '25px' }}>Logged in as {email}</small>}
+        {isLogged && <small style={{ marginLeft: '25px' }}>{email}</small>}
       </Toolbar>
     </AppBar>
   )
