@@ -13,7 +13,7 @@ desactivando algunas reglas molestas cuando se usa react (pueden verse en el fic
 
 ## Formulario de login
 
-En el formulario de login no se ha implementado validación para el email y el password por simplicidad
+En el formulario de login no se ha implementado validación para el email y el password por simplicidad.
 
 ## Autenticación
 
@@ -49,7 +49,7 @@ La aplicación se ha desplegado en Vercel. [Link](https://react-demo-app-pink.ve
 
 ## Testing
 
-A modo de ejemplo, se han añadido un par de test unitarios y un par de test e2e
+A modo de ejemplo, se han añadido un par de test unitarios y un par de test e2e.
 
 ### Test unitarios
 
@@ -68,7 +68,7 @@ A modo de ejemplo, se han añadido un par de test unitarios y un par de test e2e
 ## CI/CD
 
 Se ha configurado un workflow usando GitHub Actions que comprueba estilos con eslint y pasa los test  
-al pushear en la rama main
+al pushear en la rama main.
 
 ## Diseño responsivo
 
