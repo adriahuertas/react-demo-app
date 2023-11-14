@@ -65,6 +65,11 @@ A modo de ejemplo, se han añadido un par de test unitarios y un par de test e2e
 
 ![e2e testing](./public/cypress.png)
 
+## CI/CD
+
+Se ha configurado un workflow usando GitHub Actions que comprueba estilos con eslint y pasa los test  
+al pushear en la rama main
+
 ## Diseño responsivo
 
 Para hacer un diseño responsivo se ha utilizado, mediante MaterialUI, un diseño basado en contendores flex.  
