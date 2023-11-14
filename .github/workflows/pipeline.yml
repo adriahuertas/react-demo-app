@@ -24,6 +24,6 @@ jobs:
       - name: e2e tests
         uses: cypress-io/github-action@v5
         with:
-          command: npm run cy:run
-          start: npm run dev
+          command: pnpm run cy:run
+          start: pnpm run dev
           wait-on: http://localhost:5173
