@@ -30,3 +30,8 @@ jobs:
           command: npm run cy:run
           start: npx vite --host
           wait-on: http://localhost:5173
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.55.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
