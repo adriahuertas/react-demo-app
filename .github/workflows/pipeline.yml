@@ -17,7 +17,7 @@ jobs:
         with:
           access_token: ${{ secrets.GITHUB_TOKEN }}
 
-  install_dependencies:
+  lint:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
@@ -28,19 +28,6 @@ jobs:
         run: npm install -g pnpm
       - name: Install dependencies
         run: pnpm install
-      - uses: actions/upload-artifact@v2
-        with:
-          name: node_modules
-          path: node_modules
-
-  lint:
-    needs: [install_dependencies]
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/download-artifact@v2
-        with:
-          name: node_modules
-          path: node_modules
       - name: Check style
         run: npm run lint
 
