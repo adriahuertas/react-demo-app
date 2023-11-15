@@ -9,13 +9,17 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  simple_deployment_pipeline:
+  avoid_redundancy:
     runs-on: ubuntu-20.04
     steps:
       - name: Cancel Previous Redundant Builds
         uses: styfle/cancel-workflow-action@0.12.0
         with:
           access_token: ${{ secrets.GITHUB_TOKEN }}
+
+  lint:
+    runs-on: ubuntu-20.04
+    steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
@@ -26,8 +30,58 @@ jobs:
         run: pnpm install
       - name: Check style
         run: npm run lint
+
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - name: Install pnpm
+        run: npm install -g pnpm
+      - name: Install dependencies
+        run: pnpm install
+      - uses: actions/upload-artifact@v2
+        with:
+          name: dist
+          path: dist
+
+  test:
+    needs: [lint, build]
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - name: Install pnpm
+        run: npm install -g pnpm
+      - name: Install dependencies
+        run: pnpm install
+      - uses: actions/download-artifact@v2
+        with:
+          name: dist
+          path: dist
       - name: Test
         run: npm run test
+
+  e2e-test:
+    needs: [lint, build]
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - name: Install pnpm
+        run: npm install -g pnpm
+      - name: Install dependencies
+        run: pnpm install
+      - uses: actions/download-artifact@v2
+        with:
+          name: dist
+          path: dist
       - name: e2e tests
         uses: cypress-io/github-action@v5
         with:
@@ -36,7 +90,7 @@ jobs:
           wait-on: http://localhost:5173
 
   tag_release:
-    needs: [simple_deployment_pipeline]
+    needs: [test, e2e-test]
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
