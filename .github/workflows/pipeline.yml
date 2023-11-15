@@ -30,3 +30,4 @@ jobs:
           command: npm run cy:run
           start: npx vite --host
           wait-on: http://localhost:5173
+          asdasdasdasdas
