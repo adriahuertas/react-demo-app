@@ -10,7 +10,7 @@ interface FilterProps {
 const Filter: FC<FilterProps> = ({ handleFilterChange, filterValue }) => {
   return (
     <TextField
-      sx={{ width: '300px', marginBottom: '20px', backgroundColor: 'rgb(243, 243, 243)' }}
+      sx={{ width: '300px', marginBottom: '20px', backgroundColor: 'rgb(243, 243, 243)', '@media (max-width: 450px)': { marginBottom: '50px' } }}
       id="input-with-icon-textfield"
       value={filterValue}
       label="Buscar usuario"

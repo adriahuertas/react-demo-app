@@ -56,7 +56,7 @@ const UserList = () => {
           <div style={{ marginBottom: '25px' }}>
             <Filter handleFilterChange={handleFilterChange} filterValue={filter} />
           </div>
-          <Container sx={{ width: '100%', display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '35px' }}>
+          <Container sx={{ width: '100%', display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '35px', '@media (max-width: 450px)': { gap: '60px' } }}>
             {
 
               filteredUsersToDisplay.map((user: UserInterface) => (
