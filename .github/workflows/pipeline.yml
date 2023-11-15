@@ -31,7 +31,7 @@ jobs:
           start: npx vite --host
           wait-on: http://localhost:5173
       - name: Bump version and push tag
-        if: github.event_name == 'pull_request' && github.event.pull_request.merged == true
+        # if: github.event_name == 'pull_request' && github.event.pull_request.merged == true
         uses: anothrNick/github-tag-action@1.64.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
