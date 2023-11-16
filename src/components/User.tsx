@@ -15,7 +15,7 @@ const User = ({ user }: { user: UserInterface }) => {
   }
 
   return (
-    <Box sx={{ backgroundColor: 'rgba(0,0,0, 0.1)', minWidth: '350px', '@media (max-width: 450px)': { minWidth: '95%' } }} >
+    <Box sx={{ backgroundColor: 'rgba(0,0,0, 0.1)', minWidth: '350px', '@media (max-width: 450px)': { minWidth: '300px', marginBottom: '30px' } }} >
       <Card sx={{
         display: 'flex',
         padding: '20px',

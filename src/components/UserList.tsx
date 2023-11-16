@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux'
 import { type UserInterface } from '../interfaces/interfaces'
 import User from './User'
-import { Box, Container, Pagination } from '@mui/material'
+import { Box, Container, Grid, Pagination } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { selectUserList } from '../reducers/userListReducer'
 import Filter from './Filter'
@@ -49,21 +49,26 @@ const UserList = () => {
   return filteredUsersToDisplay !== null
     ? (
       <>
-        <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%', alignItems: 'center' }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%', alignItems: 'center', flexGrow: 1 }}>
           <div style={{ marginBottom: '25px' }}>
             <h2>Estos usuarios podrían gustarte</h2>
           </div>
           <div style={{ marginBottom: '25px' }}>
             <Filter handleFilterChange={handleFilterChange} filterValue={filter} />
           </div>
-          <Container sx={{ width: '100%', display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '35px', '@media (max-width: 450px)': { gap: '60px' } }}>
+          <Grid container spacing={4} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             {
 
               filteredUsersToDisplay.map((user: UserInterface) => (
-                <User user={user} key={user.email} />
+                <Grid
+                  key={user.email}
+                  item
+                  sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <User user={user} />
+                </Grid>
               ))
             }
-          </Container>
+          </Grid>
           <Pagination sx={{ marginTop: '25px', marginBottom: '25px' }} count={count} color="primary" onChange={handlePageChange} />
         </Box>
       </>)
