@@ -1,9 +1,10 @@
-import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material'
+import { AppBar, Toolbar, Button, Box } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { clearLoggedWithGithub, clearUser, selectUserEmail, selectUserLoggedWithGithub, selectUserToken } from '../reducers/loggedUserReducer'
 import { signOut } from 'firebase/auth'
 import { auth } from '../firebase/config'
+import ReactIcon from './ReactIcon'
 
 function Navbar() {
   const token = useSelector(selectUserToken)
@@ -34,21 +35,18 @@ function Navbar() {
   return (
     <AppBar position="fixed" sx={{ width: '100%' }}>
       <Toolbar>
-        <Typography variant="h6" sx={{ userSelect: 'none', fontSize: { xs: 12, sm: 18 } }}>
-          <Link to="/" style={{ textDecoration: 'none', color: 'white' }}>
-            React Demo APP
-          </Link>
-        </Typography>
-
+        <Link to="/" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <ReactIcon />
+        </Link>
         {/* Botones de Login y Users */}
-        <Box sx={{ display: 'flex', justifyContent: 'flex-end', flexGrow: 1 }}>
-          <Button color="inherit">
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', flexGrow: 1 }}>
+          <Button color="inherit" sx={{ '@media (max-width: 450px)': { display: 'none' } }}>
             <Link to="/users" style={{ textDecoration: 'none', color: 'white' }}>
               Usuarios
             </Link>
           </Button>
           {isLogged
-            ? (<Button color="inherit" onClick={handleLogout}>
+            ? (<Button color="inherit" onClick={handleLogout} sx={{ '@media (max-width: 450px)': { fontSize: '12px' } }}>
               Cerrar sesión
             </Button>)
             : (<Button color="inherit">
@@ -56,10 +54,12 @@ function Navbar() {
                 Login
               </Link>
             </Button>)}
+          {isLogged &&
+            <Button color="inherit" variant="text" sx={{ fontSize: '12px', marginLeft: '25px', textTransform: 'lowercase' }}>{email}</Button>
+          }
         </Box>
-        {isLogged && <small style={{ marginLeft: '25px' }}>{email}</small>}
       </Toolbar>
-    </AppBar>
+    </AppBar >
   )
 }
 
