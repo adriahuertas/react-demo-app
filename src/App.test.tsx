@@ -23,7 +23,7 @@ describe('<App />', () => {
     expect(wrapper).toBeTruthy()
 
     const text = screen.getByText(
-      /Usuarios/i
+      /acceder a la lista de usuarios/i
     )
     expect(text.textContent).toBeTruthy()
   })
