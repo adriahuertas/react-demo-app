@@ -23,7 +23,7 @@ describe('<App />', () => {
     expect(wrapper).toBeTruthy()
 
     const text = screen.getByText(
-      /React Demo APP/i
+      /Usuarios/i
     )
     expect(text.textContent).toBeTruthy()
   })
