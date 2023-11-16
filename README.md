@@ -91,7 +91,7 @@ Así, en función del ancho de pantalla se muestran 3, 2 o 1 usuario por fila.
 
 ### 1 usuario por fila con pantalla ultra pequeña
 
-![](./public/smaller_view.png)
+![](./public/smaller-view.png)
 
 ### Formulario de login
 
