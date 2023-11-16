@@ -1,11 +1,7 @@
 import { AccountCircle, Visibility, VisibilityOff } from '@mui/icons-material'
 import { Box, Button, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField } from '@mui/material'
-import { type SyntheticEvent, useState } from 'react'
-import loginService from '../services/login'
-import { useDispatch } from 'react-redux'
-import { setUser } from '../reducers/loggedUserReducer'
-import { useNavigate } from 'react-router-dom'
-import { useLogin } from '../hooks'
+import { type SyntheticEvent, useState, useEffect } from 'react'
+import { useEmailLogin, useLogin } from '../hooks'
 import GitHubIcon from '@mui/icons-material/GitHub'
 
 const Login = () => {
@@ -16,41 +12,38 @@ const Login = () => {
   // This is a local error state, not the global error state, used to display errors in login
   const [error, setError] = useState('')
 
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-
   const handleClickShowPassword = () => { setShowPassword((show) => !show) }
 
   const handleMouseDownPassword = (event: SyntheticEvent) => {
     event.preventDefault()
   }
 
-  const handleSubmit = async (e: SyntheticEvent) => {
+  const { login: handleEmailLogin, isPending: isEmailPending, isError } = useEmailLogin()
+
+  const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault()
+
     const credentials = { email, password }
 
-    // Clear the form
-    setEmail('')
-    setPassword('')
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    handleEmailLogin(credentials)
+  }
 
-    const token = await loginService.login(credentials)
-
-    if (token === null) {
+  useEffect(() => {
+    if (isError) {
       // Error
-      setError('Error en el login. El email o la contraseña son incorrectos o el usuario no existe')
-      // Error displayed for 5 seconds only
+      setError('Error en el login. El email o la contraseña son incorrectos o el usuario no existe. Puedes usar el email eve.holt@reqres.in con cualquier contraseña para probarlo.')
+      // Error displayed for 8 seconds only
       setTimeout(() => {
         setError('')
-      }, 5000)
-    } else {
-      // Save user in localstorage
-      localStorage.setItem('loggedUser', JSON.stringify({ token, email }))
-      // Set user state
-      dispatch(setUser({ token, email }))
-      // Redirect to home
-      navigate('/')
+      }, 8000)
     }
-  }
+    if (!isEmailPending) {
+      // Clear the form
+      setEmail('')
+      setPassword('')
+    }
+  }, [isError, isEmailPending])
 
   const { login: handleGithubLogin, isPending } = useLogin()
 
@@ -99,10 +92,15 @@ const Login = () => {
               label="Password"
             />
           </FormControl>
-          <Button fullWidth sx={{ mb: 2, height: '56px' }} type="submit" disabled={email.length === 0 || password.length === 0} variant="contained">Sign In</Button>
+          <Button
+            fullWidth sx={{ mb: 2, height: '56px' }}
+            type="submit"
+            disabled={email.length === 0 || password.length === 0}
+            variant="contained">
+            {isEmailPending ? 'CARGANDO' : 'Iniciar sesión con Email'}</Button>
           <Button sx={{ mb: 2, height: '56px' }} fullWidth className="btn" onClick={handleGithubLogin} variant="contained">
             <GitHubIcon sx={{ marginRight: '10px' }} />
-            {(isPending as boolean) ? 'Loading...' : 'Login With Github'}
+            {(isPending as boolean) ? 'Cargando...' : 'Iniciar sesión con Github'}
           </Button>
         </form>
         {

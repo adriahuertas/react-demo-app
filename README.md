@@ -13,13 +13,13 @@ desactivando algunas reglas molestas cuando se usa react (pueden verse en el fic
 
 ## Formulario de login
 
-En el formulario de login no se ha implementado validación para el email y el password por simplicidad
+En el formulario de login no se ha implementado validación para el email y el password por simplicidad.
 
 ## Autenticación
 
 La autenticación hace un POST a la API https://reqres.in/api/login. Para logearse se puede usar  
 el email eve.holt@reqres.in con cualquier contraseña. En caso de introducir credenciales erroneas  
-se muestra un mensaje de error durante 5 segundos. En caso de logearse correctamente, se guarda  
+se muestra un mensaje de error durante 8 segundos. En caso de logearse correctamente, se guarda  
 el token recibido y el email en el estado de la aplicación. Mientras exista ese token, se asume  
 que el usuario está identificado. Además, se guarda esta información en localStorage para mantener  
 la sesión en caso de recargar la aplicación. El Logout elimina la información del usuario tanto  
@@ -45,25 +45,30 @@ Para definir los estilos se ha utilitzado MaterialUI.
 
 ## Despliegue
 
-La aplicación se ha desplegado a traves de Vercel. [Link](https://react-demo-app-pink.vercel.app/)
+La aplicación se ha desplegado en Vercel. [Link](https://react-demo-app-pink.vercel.app/)
 
 ## Testing
 
-A modo de ejemplo, se han añadido un par de testos unitarios y un par de testos e2e
+A modo de ejemplo, se han añadido un par de test unitarios y un par de test e2e.
 
-### Testos unitarios
+### Test unitarios
 
-- Los testos unitarios se han configurado con vitest en el archivo App.test.tsx.
+- Los test unitarios se han configurado con vitest en el archivo App.test.tsx.
 - El comando para ejecutarlos es npm test.
 
 ![Unit testing](./public/unit_testing.png)
 
-### Testos e2e
+### Test e2e
 
-- Los testos e2e se han hecho con cypress en el archivo demo_app.cy.ts.
+- Los test e2e se han hecho con cypress en el archivo demo_app.cy.ts.
 - El comando para ejecutarlos es npm run cy:run.
 
 ![e2e testing](./public/cypress.png)
+
+## CI/CD
+
+Se ha configurado un workflow usando GitHub Actions que comprueba estilos con eslint y pasa los test  
+al pushear en la rama main.
 
 ## Diseño responsivo
 
@@ -87,3 +92,7 @@ Así, en función del ancho de pantalla se muestran 3, 2 o 1 usuario por fila.
 ### Formulario de login
 
 ![Formulario de Login](./public/formulario.png)
+
+### Error conectando con la API al obtener los usuarios
+
+![Error en la API](./public/error.png)
