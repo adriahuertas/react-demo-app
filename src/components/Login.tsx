@@ -1,5 +1,5 @@
 import { AccountCircle, Visibility, VisibilityOff } from '@mui/icons-material'
-import { Box, Button, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField } from '@mui/material'
+import { Alert, Box, Button, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, Snackbar, TextField } from '@mui/material'
 import { type SyntheticEvent, useState, useEffect } from 'react'
 import { useEmailLogin, useLogin } from '../hooks'
 import GitHubIcon from '@mui/icons-material/GitHub'
@@ -33,10 +33,6 @@ const Login = () => {
     if (isError) {
       // Error
       setError('Error en el login. El email o la contraseña son incorrectos o el usuario no existe. Puedes usar el email eve.holt@reqres.in con cualquier contraseña para probarlo.')
-      // Error displayed for 8 seconds only
-      setTimeout(() => {
-        setError('')
-      }, 8000)
     }
     if (!isEmailPending) {
       // Clear the form
@@ -103,14 +99,13 @@ const Login = () => {
             {(isPending as boolean) ? 'Cargando...' : 'Iniciar sesión con Github'}
           </Button>
         </form>
-        {
-          error !== '' &&
-          <div style={{ textAlign: 'center', width: '100%', color: 'red' }}>
-            <small>{error}</small>
-          </div>
-        }
       </Box>
-    </Box>
+      <Snackbar open={error !== ''} autoHideDuration={6000} onClose={() => { setError('') }} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
+        <Alert onClose={() => { setError('') }} severity="error" sx={{ width: '100%' }}>
+          {error}
+        </Alert>
+      </Snackbar>
+    </Box >
   )
 }
 
