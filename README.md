@@ -72,7 +72,7 @@ al pushear en la rama main.
 
 ## Diseño responsivo
 
-Para hacer un diseño responsivo se ha utilizado, mediante MaterialUI, un diseño basado en contendores flex.  
+Para hacer un diseño responsivo se ha utilizado el componente Grid de MaterialUI basado en contenedores flex.
 Así, en función del ancho de pantalla se muestran 3, 2 o 1 usuario por fila.
 
 ## Capturas de pantalla

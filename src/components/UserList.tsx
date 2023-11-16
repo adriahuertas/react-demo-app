@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux'
 import { type UserInterface } from '../interfaces/interfaces'
 import User from './User'
-import { Box, Container, Grid, Pagination } from '@mui/material'
+import { Box, Grid, Pagination } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { selectUserList } from '../reducers/userListReducer'
 import Filter from './Filter'
