@@ -36,7 +36,7 @@ function Navbar() {
     <AppBar position="fixed" sx={{ width: '100%' }}>
       <Toolbar>
         <Link to="/" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <ReactIcon />
+          <ReactIcon className="rotate" />
         </Link>
         {/* Botones de Login y Users */}
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', flexGrow: 1 }}>
