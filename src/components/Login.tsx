@@ -26,7 +26,6 @@ const Login = () => {
 
     const credentials = { email, password }
 
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     handleEmailLogin(credentials)
   }
 
