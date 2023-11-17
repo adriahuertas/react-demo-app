@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import { AccountCircle, Visibility, VisibilityOff } from '@mui/icons-material'
 import { Alert, Box, Button, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, Snackbar, TextField } from '@mui/material'
 import { type SyntheticEvent, useState, useEffect } from 'react'
@@ -25,14 +26,13 @@ const Login = () => {
 
     const credentials = { email, password }
 
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     handleEmailLogin(credentials)
   }
 
   useEffect(() => {
     if (isError) {
       // Error
-      setError('Error en el login. El email o la contraseña son incorrectos o el usuario no existe. Puedes usar el email eve.holt@reqres.in con cualquier contraseña para probarlo.')
+      setError('Error en el login. El email o la contraseña son incorrectos o el usuario no existe. ')
     }
     if (!isEmailPending) {
       // Clear the form
@@ -102,7 +102,9 @@ const Login = () => {
       </Box>
       <Snackbar open={error !== ''} autoHideDuration={6000} onClose={() => { setError('') }} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
         <Alert onClose={() => { setError('') }} severity="error" sx={{ width: '100%' }}>
-          {error}
+          { // eslint-disable @typescript-eslint/no-floating-promises
+          }
+          {error} Puedes usar el email <a title="Copiar" href='#' onClick={() => { navigator.clipboard.writeText('eve.holt@reqres.in') }}>eve.holt@reqres.in</a> con cualquier contraseña para probar.
         </Alert>
       </Snackbar>
     </Box >
