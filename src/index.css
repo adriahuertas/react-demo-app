@@ -59,3 +59,16 @@ a:hover {
     background-color: #f9f9f9;
   }
 }
+
+.rotate {
+  animation: rotate 25s infinite linear; /* 10s es la duración de la rotación, puedes ajustarla según tus preferencias */
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
