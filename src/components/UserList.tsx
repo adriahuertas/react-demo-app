@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux'
 import { type UserInterface } from '../interfaces/interfaces'
 import User from './User'
 import { Box, Grid, Pagination } from '@mui/material'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { selectUserList } from '../reducers/userListReducer'
 import Filter from './Filter'
 import { filterUsers } from '../utils'
@@ -16,10 +16,10 @@ const UserList = () => {
 
   const [currentPage, setCurrentPage] = useState(1)
   const [filter, setFilter] = useState('')
-  const [totalPages, setTotalPages] = useState(Math.ceil((users.length ?? 0) / WINDOW_SIZE))
+  // const [totalPages, setTotalPages] = useState(Math.ceil((users.length ?? 0) / WINDOW_SIZE))
 
   // Filtered users to display
-  const [filteredUsersToDisplay, setFilteredUsersToDisplay] = useState<UserInterface[]>(users)
+  // const [filteredUsersToDisplay, setFilteredUsersToDisplay] = useState<UserInterface[]>(users)
 
   const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
     event.preventDefault()
@@ -34,25 +34,20 @@ const UserList = () => {
 
     setFilter(newFilter)
   }
+  const filteredUsers = useMemo(() => {
+    return filterUsers(users, filter)
+  }, [users, filter])
 
-  useEffect(() => {
-    const filteredUsers = filterUsers(users, filter)
+  const filteredUsersToDisplay = useMemo(() => {
+    const start = (currentPage - 1) * WINDOW_SIZE
+    const end = start + WINDOW_SIZE
 
-    // Calculate the start and end indices for the current page
-    const startIndex = (currentPage - 1) * WINDOW_SIZE
-    const endIndex = startIndex + WINDOW_SIZE
+    return filteredUsers.slice(start, end)
+  }, [filteredUsers, currentPage])
 
-    // Get the slice of users for the current page
-    const usersToDisplay = filteredUsers.slice(startIndex, endIndex)
-
-    // Set the filtered users to display
-    setFilteredUsersToDisplay(usersToDisplay)
-
-    // Set total pages
-    setTotalPages(Math.ceil(filteredUsers.length / WINDOW_SIZE))
-  }, [users, currentPage, filter])
-
-  console.log(currentPage)
+  const totalPages = useMemo(() => {
+    return Math.ceil((filteredUsers.length ?? 0) / WINDOW_SIZE)
+  }, [filteredUsers])
 
   return filteredUsersToDisplay !== null
     ? (
