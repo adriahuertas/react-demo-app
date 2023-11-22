@@ -14,37 +14,45 @@ const UserList = () => {
   // Get All users from redux
   const users = useSelector(selectUserList)
 
+  const [currentPage, setCurrentPage] = useState(1)
   const [filter, setFilter] = useState('')
+  const [totalPages, setTotalPages] = useState(Math.ceil((users.length ?? 0) / WINDOW_SIZE))
 
-  // We only display 6 users per page
-  const [usersToDisplay, setUsersToDisplay] = useState<UserInterface[] | null>(null)
   // Filtered users to display
-  const [filteredUsersToDisplay, setFilteredUsersToDisplay] = useState<UserInterface[] | null>(null)
-
-  // Number of available pages
-  const count = users.length / WINDOW_SIZE
+  const [filteredUsersToDisplay, setFilteredUsersToDisplay] = useState<UserInterface[]>(users)
 
   const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
     event.preventDefault()
 
-    setUsersToDisplay(users.slice((value - 1) * 6, value * 6))
-    setFilteredUsersToDisplay(users.slice((value - 1) * 6, value * 6))
-
-    setFilter('')
+    setCurrentPage(value)
   }
 
   const handleFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newFilter = event.target.value
 
-    setFilter(newFilter)
+    setCurrentPage(1)
 
-    setFilteredUsersToDisplay(filterUsers(usersToDisplay, newFilter))
+    setFilter(newFilter)
   }
 
   useEffect(() => {
-    setUsersToDisplay(users.slice(0, WINDOW_SIZE))
-    setFilteredUsersToDisplay(users.slice(0, WINDOW_SIZE))
-  }, [users])
+    const filteredUsers = filterUsers(users, filter)
+
+    // Calculate the start and end indices for the current page
+    const startIndex = (currentPage - 1) * WINDOW_SIZE
+    const endIndex = startIndex + WINDOW_SIZE
+
+    // Get the slice of users for the current page
+    const usersToDisplay = filteredUsers.slice(startIndex, endIndex)
+
+    // Set the filtered users to display
+    setFilteredUsersToDisplay(usersToDisplay)
+
+    // Set total pages
+    setTotalPages(Math.ceil(filteredUsers.length / WINDOW_SIZE))
+  }, [users, currentPage, filter])
+
+  console.log(currentPage)
 
   return filteredUsersToDisplay !== null
     ? (
@@ -69,7 +77,7 @@ const UserList = () => {
               ))
             }
           </Grid>
-          <Pagination sx={{ marginTop: '25px', marginBottom: '25px' }} count={count} color="primary" onChange={handlePageChange} />
+          <Pagination sx={{ marginTop: '25px', marginBottom: '25px' }} page={currentPage} count={totalPages} color="primary" onChange={handlePageChange} />
         </Box>
       </>)
     : null
