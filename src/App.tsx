@@ -25,9 +25,9 @@ function App() {
       <Navbar />
       <Container disableGutters sx={{ maxWidth: '1300', paddingTop: '100px', display: 'flex', justifyContent: 'center', pl: '10px', pr: '10px' }}>
         < Routes >
-          <Route path="/" element={isLogged ? <UserListFetch /> : <Login />} />
-          <Route path="/login" element={isLogged ? <UserListFetch /> : <Login />} />
-          <Route path="/users" element={isLogged ? <UserListFetch /> : <Login />} />
+          <Route path="/" element={isLogged ? <Navigate to="/login" /> : <Navigate to="/users" />} />
+          <Route path="/login" element={isLogged ? <Navigate to="/users" /> : <Login />} />
+          <Route path="/users" element={isLogged ? <UserListFetch /> : <Navigate to="/login" />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes >
       </Container >
