@@ -1,13 +1,13 @@
-import axios from 'axios'
 import { type Credentials } from '../interfaces/interfaces'
+import apiInstance from '../ApiInstance'
 
 const baseUrl = 'https://reqres.in/api/login'
 
 const login = async (credentials: Credentials) => {
   try {
-    const response = await axios.post(baseUrl, credentials)
+    const response = await apiInstance.post(baseUrl, credentials)
     return response.data
-  } catch (error: any) {
+  } catch (error) {
     return null
   }
 }
