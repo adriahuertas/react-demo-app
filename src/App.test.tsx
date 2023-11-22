@@ -1,5 +1,5 @@
 import { describe, test, expect, beforeEach } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { type RenderResult, render, screen } from '@testing-library/react'
 import App from './App'
 import { Provider } from 'react-redux'
 import { QueryClientProvider, QueryClient } from 'react-query'
@@ -9,7 +9,7 @@ import store from './store.js'
 const queryClient = new QueryClient()
 
 describe('<App />', () => {
-  let wrapper: any
+  let wrapper: RenderResult
   beforeEach(() => {
     wrapper = render(<Provider store={store}>
       <QueryClientProvider client={queryClient}>
